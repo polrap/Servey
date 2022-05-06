@@ -2,16 +2,21 @@ package testone;
 
 public class ServeyVO {
 	private String serveyname;
+
 	private long serveycode;
 	private long serveycount;
-	
 	public ServeyVO() {
-		
 	}
-	
+	public ServeyVO(String serveyname, long serveycode, long serveycount) {
+		super();
+		this.serveyname = serveyname;
+		this.serveycode = serveycode;
+		this.serveycount = serveycount;
+	}
+
 	@Override
 	public String toString() {
-		return "ServeyVO [장르명=" + serveyname + ", 좋아요 횟수=" + serveycount+ "]";
+		return "[장르명=" + serveyname + "]";
 	}
 
 	public String getServeyname() {
