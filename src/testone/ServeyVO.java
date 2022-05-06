@@ -1,6 +1,7 @@
 package testone;
 
 public class ServeyVO {
+
 	private String serveyname;
 
 	private long serveycode;
@@ -16,7 +17,7 @@ public class ServeyVO {
 
 	@Override
 	public String toString() {
-		return "[¿Â∏£∏Ì=" + serveyname + "]";
+		return "[" + serveyname + "]";
 	}
 
 	public String getServeyname() {
@@ -37,6 +38,5 @@ public class ServeyVO {
 	public void setServeycount(long serveycount) {
 		this.serveycount = serveycount;
 	}
-
-
+	
 }
