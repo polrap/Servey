@@ -13,7 +13,7 @@ public class UserDAO {
 	public UserDAO() {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}
-	public boolean insertUser(UserVO vo) {
+	public boolean insertUser(UserVO vo) throws SQLException{
 		boolean ret = false;
 		String sql = "insert into \"USER\" values (?, ?, ?)";
 		try {
@@ -28,7 +28,8 @@ public class UserDAO {
 			System.out.println(result + "의 user info가 삽입 되었습니다.");
 			ret = true;
 		} catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println("보기 사항에 없는 번호를 입력 하셨습니다.\n 첫 화면으로 돌아가겠습니다.");
+			ret= false;
 		} finally {
 			if(pstmt != null) {
 				try {

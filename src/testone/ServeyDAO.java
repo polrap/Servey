@@ -19,7 +19,7 @@ ResultSet rs = null;
 public ServeyDAO() {
 	jdbcTemplate = JdbcTemplate.getInstance();
 }
-public boolean insertInfo(ServeyVO vo) {
+public boolean insertInfo(ServeyVO vo) throws SQLException{
 	boolean ret = false;
 	String sql = "insert into \"SERVEY\" values (?, \"SERVEY_CODE\".nextval, ?)";
 	try {
@@ -51,7 +51,7 @@ public boolean insertInfo(ServeyVO vo) {
 	return ret;
 }
 
-public void insertInfo(String servey) {
+public void insertInfo(String servey) throws SQLException{
 	String sql = "insert into \"SERVEY\" values (?, \"SERVEY_CODE\".nextval, ?)";
 	try {
 		conn = jdbcTemplate.getConnection();
@@ -120,7 +120,7 @@ public void insertInfo(String servey) {
 //	}
 //	return (ls.size() == 0) ? null : ls;
 //}
-public List<ServeyVO> selectAll(int selectquery){
+public List<ServeyVO> selectAll(int selectquery)throws SQLException{
 	String sql="";
 	if(selectquery==1) {
 		sql= "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
@@ -167,7 +167,7 @@ public List<ServeyVO> selectAll(int selectquery){
 	}
 	return (ls.size() == 0) ? null : ls;
 }
-public void updateInfo(int values) {
+public void updateInfo(int values) throws SQLException{
  
 	String sql="update \"SERVEY\" set \"SERVEY_COUNT\"=(select \"SERVEY_COUNT\" from \"SERVEY\" where  \"SERVEY_CODE\"="+values+")+1" +" where \"SERVEY_CODE\"="+values +""; 
 
@@ -181,7 +181,7 @@ public void updateInfo(int values) {
 		e.printStackTrace();
 	} 
 }
-public boolean selectServeyName(String serveyname){
+public boolean selectServeyName(String serveyname)throws SQLException{
 	String sql = "select  * from \"SERVEY\"where  \"SERVEY_NAME\"= ?";
 	boolean stat=false;
 	try {
@@ -222,7 +222,7 @@ public boolean selectServeyName(String serveyname){
 	return stat;
 }
 
-public int lastServey_Code() {
+public int lastServey_Code() throws SQLException{
 	int ok=0;
 	String sql= "select  \"SERVEY_CODE\" from \"SERVEY\" where ROWNUM<=1 order by \"SERVEY_CODE\" desc ";
 	try {

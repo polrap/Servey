@@ -13,7 +13,7 @@ public class SongDAO {
 	public SongDAO() {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}
-	public void insertSong(SongVO svo) {
+	public void insertSong(SongVO svo) throws SQLException{
 		String sql = "insert into \"SONG\" values (?, ?, 1)";
 		try {
 			conn = jdbcTemplate.getConnection();
@@ -41,7 +41,7 @@ public class SongDAO {
 			}
 		}
 	}
-	public boolean selectOne(String songname, long code){
+	public boolean selectOne(String songname, long code)throws SQLException{
 		List<SongVO> ls = new ArrayList<>();
 		boolean si=true;
 		String sql = "select * from \"SONG\" where \"SERVEY_CODE\"= ? and \"SONGNAME\"=? ";
@@ -83,7 +83,7 @@ public class SongDAO {
 		}
 		return si;
 	}
-	public void updateSongCount(String songname, long code) {
+	public void updateSongCount(String songname, long code) throws SQLException{
 		String sql="update \"SONG\" set \"SONGCOUNT\"=(select \"SONGCOUNT\" from \"SONG\" where \"SERVEY_CODE\"="+code+"and"+"\"SONGNAME\"="+"'"+songname+"'"+""+")+1" +" where \"SERVEY_CODE\"="+code +"";
 		try {
 			conn = jdbcTemplate.getConnection();
