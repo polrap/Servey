@@ -14,12 +14,13 @@ public class MainTest {
 		loop1:while(infostat) {
 			mc.inter();
 			age=sc.nextInt();
-			mistat=mc.ageTran(age);
-			System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
-			gender=sc.nextInt();
-			while(mistat) {
-				mc.forPrint(age, gender);
-				continue loop1;
+			if(mistat=mc.ageTran(age)) {
+				System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
+				gender=sc.nextInt();
+				while(mistat) {
+					mc.forPrint(age, gender);
+					continue loop1;
+				}
 			}
 		}
 		

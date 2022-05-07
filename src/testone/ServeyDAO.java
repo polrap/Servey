@@ -59,7 +59,7 @@ public void insertInfo(String servey) {
 		pstmt.setString (1, servey); 
 		pstmt.setLong(2, 1);
 		int result = pstmt.executeUpdate();
-		System.out.println(result + "행이 삽입 되었습니다.");
+		System.out.println(result + "servey가 삽입 되었습니다.");
 	} catch(SQLException e) {
 		e.printStackTrace();
 	} finally {
@@ -135,6 +135,47 @@ public void updateInfo(int values) {
 		e.printStackTrace();
 	} 
 }
+public boolean selectServeyName(String serveyname){
+	String sql = "select  * from \"SERVEY\"where  \"SERVEY_NAME\"= ?";
+	boolean stat=false;
+	try {
+		conn = jdbcTemplate.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, serveyname);
+		rs = pstmt.executeQuery(); //쿼리 전송!
+		if(rs.next()) {
+			stat=false;
+		}else if(!rs.next()) {
+			stat=true;
+		}
+	} catch(SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return stat;
+}
+
 public int lastServey_Code() {
 	int ok=0;
 	String sql= "select  \"SERVEY_CODE\" from \"SERVEY\" where ROWNUM<=1 order by \"SERVEY_CODE\" desc ";
