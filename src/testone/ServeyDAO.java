@@ -24,7 +24,6 @@ public boolean insertInfo(ServeyVO vo) {
 	String sql = "insert into \"SERVEY\" values (?, \"SERVEY_CODE\".nextval, ?)";
 	try {
 		conn = jdbcTemplate.getConnection();
-		
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString (1, vo.getServeyname()); 
 		pstmt.setLong(2, vo.getServeycount());
@@ -51,6 +50,7 @@ public boolean insertInfo(ServeyVO vo) {
 	}
 	return ret;
 }
+
 public void insertInfo(String servey) {
 	String sql = "insert into \"SERVEY\" values (?, \"SERVEY_CODE\".nextval, ?)";
 	try {
@@ -79,10 +79,56 @@ public void insertInfo(String servey) {
 		}
 	}
 }
-public List<ServeyVO> selectAll(){
+//public List<ServeyVO> selectAll(){
+//	List<ServeyVO> ls = new ArrayList<>();
+//	String sql = "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
+//	try {
+//		conn = jdbcTemplate.getConnection();
+//		pstmt = conn.prepareStatement(sql);
+//		rs = pstmt.executeQuery(); //Äõ¸® Àü¼Û!
+//		while(rs.next()) {
+//			ServeyVO tmp = new ServeyVO(
+//					rs.getString("SERVEY_NAME"),
+//					rs.getLong("SERVEY_CODE"),
+//					rs.getLong("SERVEY_COUNT"));
+//		ls.add(tmp);			
+//		}
+//	} catch(SQLException e) {
+//		e.printStackTrace();
+//	} finally {
+//		if(rs != null) {
+//			try {
+//				rs.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		if(pstmt != null) {
+//			try {
+//				pstmt.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		if(conn != null) {
+//			try {
+//				conn.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+//	return (ls.size() == 0) ? null : ls;
+//}
+public List<ServeyVO> selectAll(int selectquery){
+	String sql="";
+	if(selectquery==1) {
+		sql= "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
+	}else if(selectquery==2) {
+		sql= "select  * from \"SERVEY\"order by \"SERVEY_COUNT\" desc ";
+	}
 	List<ServeyVO> ls = new ArrayList<>();
 	
-	String sql = "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
 	try {
 		conn = jdbcTemplate.getConnection();
 		pstmt = conn.prepareStatement(sql);

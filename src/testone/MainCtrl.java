@@ -1,5 +1,6 @@
 package testone;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,27 +11,56 @@ public class MainCtrl {
 	Scanner sc= new Scanner(System.in);
 	SongVO svo;
 	UserVO uvo;
-	boolean strstat=true;
+	boolean infostat=true;
+	boolean strstate=true;
+	boolean strstatetwo=true;
 	public void inter() {
+		loop1:while(infostat) {
+		boolean mistat;
 			System.out.println("음악 설문조사");
 			System.out.println("1. 설문 참여");
 			System.out.println("2. 설문 참여 현황");
-			if(sc.nextInt()==1) {
+			int index=sc.nextInt();
+			if(index==1) {
 				System.out.println("설문에 참여해 주셔서 감사합니다!");
 				System.out.println();
 				System.out.println("자신의 연령 대를 입력해주세요\n Ex)20대 이면 20을 입력 부탁드립니다.");
-			}else if(sc.nextInt()==2) {
-				
+				int age=sc.nextInt();
+				if(mistat=ageTran(age)) {
+					System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
+					int gender=sc.nextInt();
+					while(mistat) {
+						forPrint(age, gender);
+						continue loop1;
+					}
+				}
+			}else if(index==2) {
+				System.out.println("1.장르 순위 보기");
+				System.out.println("2.나이 대별 장르 순위 보기");
+				System.out.println("3. 장르별  추천 노래 보기");
+				int mindex=sc.nextInt();
+				if(mindex==1) {
+					int selectquery=2;
+					forPrint(selectquery);
+				}
 			}
+		}
+
 	}
 	public void etc(int age, int gender, int value) {
-		System.out.println("현재 보기에 없고 즐겨듣는 장르를 추가해 주세요");
-		sc.nextLine();String servey=sc.nextLine();
+		System.out.println("현재 보기에 없고 즐겨듣는 장르를 특수문자 제외하여 추가해 주세요\n");
+		String servey="";
+		if(strstate==true) {
+			sc.nextLine();servey=sc.nextLine();
+			strstate=false;
+		}else if(strstate==false) {
+			servey=sc.nextLine();
+		}
 		if(sdao.selectServeyName(servey)) {
 			sdao.insertInfo(servey);
 			value=sdao.lastServey_Code(); 
 			makeUser( value, age, gender);
-			songIn(age, gender,value );
+			//songIn(age, gender,value );
 		}else {
 			System.out.println("현재 목록중 기재되어 있는 장르 입니다.\n 처음으로 돌아갑니다.");
 		}
@@ -38,7 +68,7 @@ public class MainCtrl {
 	}
 	public boolean ageTran(int age) {
 		boolean agestat=true;
-		if(age/10==0) {
+		if(age%10!=0) {
 			System.out.println("잘못 입력하셨습니다 처음 안내로 돌아갑니다");
 			agestat=false;
 			return agestat;
@@ -47,9 +77,15 @@ public class MainCtrl {
 	}
 	public void turnTable(int age, int gender,int i) {
 		System.out.println("장르를 골라주세요");
-		int value= sc.nextInt();
+		int value=0;
+		try {
+			value= sc.nextInt();
+		}catch(InputMismatchException e) {
+			
+		}
 		if(value==i) {
 			etc(age, gender, value);
+			songIn(age, gender,value );
 		}else if(value!=i){
 			sdao.updateInfo(value);
 			makeUser( value, age, gender);
@@ -57,7 +93,8 @@ public class MainCtrl {
 		}
 	}
 	public void forPrint(int age, int gender) {
-		List<ServeyVO>ret=sdao.selectAll();
+		int a=1;
+		List<ServeyVO>ret=sdao.selectAll(a);
 		int i;
 		for( i=0; i<ret.size(); i++) {
 			System.out.println(i+1+".  "+ret.get(i));
@@ -69,12 +106,22 @@ public class MainCtrl {
 		i++;
 		turnTable(age, gender,i);
 	}
+	public void forPrint(int a) {
+		List<ServeyVO>ret=sdao.selectAll(a);
+		int i=0;
+		for(ServeyVO tmp: ret) {
+			i++;
+			System.out.println(i+"\t"+tmp.inString());
+		}
+	}
 	public void songIn(int age,int gender, int value) {
 		System.out.println("선택하신 장르 중 가장 좋아하시는 음악의 제목을 넣어주세요");
 		String songname="";
-		if(strstat) {
+		if(strstatetwo==true) {
 			sc.nextLine();songname=sc.nextLine();
-		}else if(!strstat) {
+			strstatetwo=false;
+		}
+		else if(strstatetwo==false) {
 			songname=sc.nextLine();
 		}
 		svo=new SongVO(songname,value );
@@ -83,7 +130,7 @@ public class MainCtrl {
 		}else if(!songDAO.selectOne(songname, value)) {
 			songDAO.updateSongCount(songname,value);
 		}
-		strstat=false;
+		
 		System.out.println("설문에 참여해주셔서 감사합니다");
 		System.out.println();
 	}

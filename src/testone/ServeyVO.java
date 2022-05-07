@@ -19,10 +19,16 @@ public class ServeyVO {
 	public String toString() {
 		return "[" + serveyname + "]";
 	}
+	
+	public String inString() {
+		return "[장르명:\t" + serveyname + ", 투표 수:\t" + serveycount
+				+ "]";
+	}
 
 	public String getServeyname() {
 		return serveyname;
 	}
+	
 	public void setServeyname(String serveyname) {
 		this.serveyname = serveyname;
 	}
