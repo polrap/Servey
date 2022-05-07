@@ -135,5 +135,42 @@ public void updateInfo(int values) {
 		e.printStackTrace();
 	} 
 }
+public int lastServey_Code() {
+	int ok=0;
+	String sql= "select  \"SERVEY_CODE\" from \"SERVEY\" where ROWNUM<=1 order by \"SERVEY_CODE\" desc ";
+	try {
+		conn = jdbcTemplate.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery(); //Äõ¸® Àü¼Û!
+		rs.next();
+		ok=rs.getInt("SERVEY_CODE");
+	} catch(SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return ok;
+	
+}
 
 }
