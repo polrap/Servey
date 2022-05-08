@@ -20,65 +20,62 @@ public class MainCtrl {
 		sc= new Scanner(System.in);
 		loop1:while(infostat) {
 		boolean mistat;
-			System.out.println("음악 설문조사");
-			System.out.println("1. 설문 참여");
-			System.out.println("2. 설문 참여 현황");
-			try {
-				index=sc.nextInt();
-				if(index==1) {
-					System.out.println("설문에 참여해 주셔서 감사합니다!");
-					System.out.println();
-					System.out.println("자신의 연령 대를 입력해주세요\n Ex)20대 이면 20을 입력 부탁드립니다.");
-					int age=sc.nextInt();
-					if(mistat=ageTran(age)) {
-						System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
-						int gender;
-							gender=sc.nextInt();
-							if(gender==1 ||gender==2) {
-								while(mistat) {
-									try {
-										forPrint(age, gender);
-									} catch (SQLException e) {
-										e.printStackTrace();
-									}
-									break;
-								}
-							}else {
-								System.out.println("보기 중 없는 번호를 입력하셨습니다.\n 첫 화면으로 돌아갑니다.뾰로롱\n ");
-								break;
-							}
-							break;
-					}
-				}else if(index==2) {
-					int mindex=0;
-					System.out.println("1.장르 순위 보기");
-					System.out.println("2.나이 대별 장르 순위 보기");
-					System.out.println("3. 장르별  추천 노래 보기");
-					mindex=sc.nextInt();
-					if(mindex==1) {
-						int selectquery=2;
+		System.out.println("음악 설문조사");
+		System.out.println("1. 설문 참여");
+		System.out.println("2. 설문 참여 현황");
+		try {
+			index=sc.nextInt();
+			if(index==1) {
+			System.out.println("설문에 참여해 주셔서 감사합니다!");
+			System.out.println();
+			System.out.println("자신의 연령 대를 입력해주세요\n Ex)20대 이면 20을 입력 부탁드립니다.");
+			int age=sc.nextInt();
+			if(mistat=ageTran(age)) {
+				System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
+				int gender;
+				gender=sc.nextInt();
+				if(gender==1 ||gender==2) {
+					while(mistat) {
 						try {
-							forPrint(selectquery);
+							forPrint(age, gender);
 						} catch (SQLException e) {
-							}
-					}else if(mindex==2) {
-						}else {
-						System.out.println("목록에 없는 값으로 돌아가요~\n");
-							//continue loop1;
+							e.printStackTrace();
 						}
-				}else {
-						System.out.println("목록에 없는 값으로 돌아가요~\n");
-						continue loop1;
+						break;
+					}
+				}else {System.out.println("보기 중 없는 번호를 입력하셨습니다.\n 첫 화면으로 돌아갑니다.뾰로롱\n ");
+					break;
 				}
+			break;
+			}
+			}else if(index==2) {
+				int mindex=0;
+				System.out.println("1.장르 순위 보기");
+				System.out.println("2.나이 대별 장르 순위 보기");
+				System.out.println("3. 장르별  추천 노래 보기");
+				mindex=sc.nextInt();
+				if(mindex==1) {
+					int selectquery=2;
+					try {
+						forPrint(selectquery);
+					} catch (SQLException e) {
+					}
+				}else if(mindex==2) {
+				}else {
+				System.out.println("목록에 없는 값으로 돌아가요~\n");
+							//continue loop1;
+				}
+			}else {
+				System.out.println("목록에 없는 값으로 돌아가요~\n");
+				continue loop1;
+			}
 		}
 		catch(InputMismatchException e) {
-			System.out.println("입력형식이 잘못되어 돌아갑니다.\n");
-			inter();
+		System.out.println("입력형식이 잘못되어 돌아갑니다.\n");
+		inter();
 		}
 		}
 	}
-	
-	
 	
 	public boolean ageTran(int age) {
 		boolean agestat=true;
@@ -105,14 +102,14 @@ public class MainCtrl {
 		turnTable(age, gender,serveyIndex);
 		}
 
-		public void forPrint(int a) throws SQLException{
-			List<ServeyVO>ret=sdao.selectAll(a);
-			int i=0;
-			for(ServeyVO tmp: ret) {
-				i++;
-				System.out.println(i+"\t"+tmp.inString());
-			}
+	public void forPrint(int a) throws SQLException{
+		List<ServeyVO>ret=sdao.selectAll(a);
+		int i=0;
+		for(ServeyVO tmp: ret) {
+			i++;
+			System.out.println(i+"\t"+tmp.inString());
 		}
+	}
 	
 	public void turnTable(int age, int gender,int i) {
 	System.out.println("장르를 골라주세요");
