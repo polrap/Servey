@@ -79,47 +79,7 @@ public void insertServey(String servey) throws SQLException{
 		}
 	}
 }
-//public List<ServeyVO> selectAll(){
-//	List<ServeyVO> ls = new ArrayList<>();
-//	String sql = "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
-//	try {
-//		conn = jdbcTemplate.getConnection();
-//		pstmt = conn.prepareStatement(sql);
-//		rs = pstmt.executeQuery(); //孽府 傈价!
-//		while(rs.next()) {
-//			ServeyVO tmp = new ServeyVO(
-//					rs.getString("SERVEY_NAME"),
-//					rs.getLong("SERVEY_CODE"),
-//					rs.getLong("SERVEY_COUNT"));
-//		ls.add(tmp);			
-//		}
-//	} catch(SQLException e) {
-//		e.printStackTrace();
-//	} finally {
-//		if(rs != null) {
-//			try {
-//				rs.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		if(pstmt != null) {
-//			try {
-//				pstmt.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		if(conn != null) {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//	}
-//	return (ls.size() == 0) ? null : ls;
-//}
+
 public List<ServeyVO> selectAll(int selectquery)throws SQLException{
 	String sql="";
 	if(selectquery==1) {
@@ -188,7 +148,7 @@ public boolean selectServeyName(String serveyname)throws SQLException{
 		conn = jdbcTemplate.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, serveyname);
-		rs = pstmt.executeQuery(); //孽府 傈价!
+		rs = pstmt.executeQuery();
 		if(rs.next()) {
 			stat=false;
 		}else if(!rs.next()) {

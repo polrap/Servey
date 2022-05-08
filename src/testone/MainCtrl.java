@@ -9,6 +9,7 @@ public class MainCtrl {
 	ServeyDAO sdao= new ServeyDAO();
 	SongDAO songDAO= new SongDAO();
 	UserDAO udao=new UserDAO();
+	JoinDAO jdao= new JoinDAO();
 	Scanner sc;
 	SongVO svo;
 	UserVO uvo;
@@ -61,9 +62,19 @@ public class MainCtrl {
 					} catch (SQLException e) {
 					}
 				}else if(mindex==2) {
-				}else {
-				System.out.println("목록에 없는 값으로 돌아가요~\n");
-							//continue loop1;
+					int selectquery=mindex;
+					try {
+						forPrintJDAO(selectquery);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}else if(mindex==3){
+					int selectquery=mindex;
+					try {
+						forPrintJDAO(selectquery);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 			}else {
 				System.out.println("목록에 없는 값으로 돌아가요~\n");
@@ -108,6 +119,23 @@ public class MainCtrl {
 		for(ServeyVO tmp: ret) {
 			i++;
 			System.out.println(i+"\t"+tmp.inString());
+		}
+	}
+	public void forPrintJDAO(int selectquery) throws SQLException{
+		if(selectquery==2) {
+		List<JoinVO>ret=jdao.selectAll();
+		int i=0;
+		for(JoinVO tmp: ret) {
+			i++;
+			System.out.println(i+"\t"+tmp.secondQueryString());
+		}
+		}else if(selectquery==3) {
+			List<JoinVO>ret=jdao.selectThree();
+			int i=0;
+			for(JoinVO tmp: ret) {
+				i++;
+				System.out.println(i+"\t"+tmp.threeQueryString());
+			}
 		}
 	}
 	
