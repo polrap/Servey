@@ -36,7 +36,6 @@ public class MainCtrl {
 							gender=sc.nextInt();
 							if(gender==1 ||gender==2) {
 								while(mistat) {
-								//	int serveyIndex;
 									try {
 										forPrint(age, gender);
 									} catch (SQLException e) {
@@ -106,23 +105,6 @@ public class MainCtrl {
 		turnTable(age, gender,serveyIndex);
 		}
 
-//		public int  forPrint(int age, int gender) throws SQLException {
-//			System.out.println("장르 보기 목록");
-//			int a=1;
-//			List<ServeyVO>ret=sdao.selectAll(a);
-//			int serveyIndex;
-//			for( serveyIndex=0; serveyIndex<ret.size(); serveyIndex++) {
-//				System.out.println(serveyIndex+1+".  "+ret.get(serveyIndex));
-//			}
-//			if(serveyIndex==ret.size()) {
-//				System.out.println(serveyIndex+1+"기타()");
-//				System.out.println();
-//			}
-//			serveyIndex++;
-//			return	serveyIndex++;
-//		turnTable(age, gender,serveyIndex);
-//		}
-
 		public void forPrint(int a) throws SQLException{
 			List<ServeyVO>ret=sdao.selectAll(a);
 			int i=0;
@@ -167,42 +149,6 @@ public class MainCtrl {
 		}
 	}
 	}
-//	public boolean turnTable(int age, int gender,int serveyIndex) {
-//		boolean inServeyList=true;
-//		System.out.println("장르를 골라주세요");
-//		int serveycode=0;
-//		try {
-//			serveycode=sc.nextInt();
-//		}catch(InputMismatchException e) {
-//			System.out.println("잘못된 정보 입니다.");
-//			try {
-//				inter();
-//			} catch (ScopeException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//		if(serveycode==serveyIndex) {
-//			inServeyList=true;
-////			etc(age, gender, serveycode);
-////			try {
-////				serveycode=sdao.lastServey_Code(); 
-////				makeUser( serveycode, age, gender);
-////			} catch (SQLException e) {
-////				e.printStackTrace();
-////			}
-//		}else if(serveycode!=serveyIndex){
-//			inServeyList=false;
-////			try {
-////				sdao.updateInfo(serveycode);
-////				makeUser( serveycode, age, gender);
-////				songIn( age,  gender, serveycode);
-////			} catch (SQLException e) {
-////				e.printStackTrace();
-////			}
-//		}
-//		return inServeyList;
-//	}
-	
 	public boolean etc(int age, int gender, int value) {
 		boolean inputServeyName=true;
 		System.out.println("현재 보기에 없고 즐겨듣는 장르를 특수문자 제외하여 추가해 주세요\n");
@@ -210,13 +156,6 @@ public class MainCtrl {
 		sc.nextLine();
 		servey=sc.nextLine();
 		songInput=true;
-//		if(this.serveyInput==false) {
-//			servey=sc.nextLine();
-//			this.serveyInput=true;
-//		}else if(this.serveyInput==true) {
-//			servey=sc.nextLine();servey=sc.nextLine();
-//			this.songInput=false;
-//		}
 			try {
 				if(sdao.selectServeyName(servey)) {
 					sdao.insertServey(servey);
@@ -231,28 +170,7 @@ public class MainCtrl {
 			}
 		return inputServeyName;
 	}
-//	public void etc(int age, int gender, int value) {
-//		System.out.println("현재 보기에 없고 즐겨듣는 장르를 특수문자 제외하여 추가해 주세요\n");
-//		String servey="";
-//		sc.nextLine();servey=sc.nextLine();
-////		if(inputCount==0) {
-////			servey=sc.nextLine();
-////			inputCount++;
-////		}else if(inputCount>=1) {
-////			sc.nextLine();servey=sc.nextLine();
-////			inputCount++;
-////		}
-//		try {
-//			if(sdao.selectServeyName(servey)) {
-//				sdao.insertInfo(servey);
-//				songIn(age, gender,value );
-//			}else {
-//				System.out.println("현재 목록중 기재되어 있는 장르 입니다.\n 처음으로 돌아갑니다.");
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	
 	public boolean songIn(int age,int gender, int value) {
 		boolean songInComplete=true;
 		System.out.println("선택하신 장르 중 가장 좋아하시는 음악의 제목을 넣어주세요");
@@ -262,20 +180,6 @@ public class MainCtrl {
 		}else if(songInput==true) {
 			songname=sc.nextLine();
 		}
-		//sc.nextLine();songname=sc.nextLine();
-		//sc.nextLine();songname=sc.nextLine();
-//		if(this.serveyInput==false) {
-//			if(this.songInput==false) {
-//				songname=sc.nextLine();
-//				this.serveyInput=true;
-//			}else {
-//				sc.nextLine();songname=sc.nextLine();
-//				this.serveyInput=true;
-//			}
-//		}else if(this.serveyInput==true){//sc.nextLine();
-//		sc.nextLine();songname=sc.nextLine();
-//		this.serveyInput=true;
-//		}
 		svo=new SongVO(songname,value);
 		try {
 			if(songDAO.selectOne(songname, value)) {
@@ -309,119 +213,3 @@ public class MainCtrl {
 		return s;
 	}
 }
-//public void forPrint(int age, int gender) throws SQLException {
-//System.out.println("장르 보기 목록");
-//int a=1;
-//List<ServeyVO>ret=sdao.selectAll(a);
-//int serveyIndex;
-//for( serveyIndex=0; serveyIndex<ret.size(); serveyIndex++) {
-//	System.out.println(serveyIndex+1+".  "+ret.get(serveyIndex));
-//}
-//if(serveyIndex==ret.size()) {
-//	System.out.println(serveyIndex+1+"기타()");
-//	System.out.println();
-//}
-//serveyIndex++;
-//turnTable(age, gender,serveyIndex);
-//}
-//public void turnTable(int age, int gender,int i) {
-//System.out.println("장르를 골라주세요");
-//int value=0;
-//try {
-//	value=sc.nextInt();
-//}catch(InputMismatchException e) {
-//	System.out.println("잘못된 정보 입니다.");
-//	try {
-//		inter();
-//	} catch (ScopeException e1) {
-//		e1.printStackTrace();
-//	}
-//}
-//if(value==i) {
-//	etc(age, gender, value);
-//	try {
-//		value=sdao.lastServey_Code(); 
-//		makeUser( value, age, gender);
-//	} catch (SQLException e) {
-//		e.printStackTrace();
-//	}
-//}else if(value!=i){
-//	try {
-//		sdao.updateInfo(value);
-//		makeUser( value, age, gender);
-//		songIn( age,  gender, value);
-//	} catch (SQLException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//}
-//}
-
-//public void inter() throws ScopeException{
-//	sc= new Scanner(System.in);
-//	loop1:while(infostat) {
-//	boolean mistat;
-//		System.out.println("음악 설문조사");
-//		System.out.println("1. 설문 참여");
-//		System.out.println("2. 설문 참여 현황");
-//		try {
-//			index=sc.nextInt();
-//		}catch(InputMismatchException e) {
-//			System.out.println("입력형식이 잘못되어 돌아갑니다.");
-//			inter();
-//		}
-//		
-//		if(index==1) {
-//			System.out.println("설문에 참여해 주셔서 감사합니다!");
-//			System.out.println();
-//			System.out.println("자신의 연령 대를 입력해주세요\n Ex)20대 이면 20을 입력 부탁드립니다.");
-//			int age=sc.nextInt();
-//			if(mistat=ageTran(age)) {
-//				System.out.println("성별을 입력해주세요\n 1. 남성 2. 여성");
-//				int gender=sc.nextInt();
-//				if(gender==1 ||gender==2) {
-//					while(mistat) {
-//						int serveyIndex;
-//						try {
-//							forPrint(age, gender);
-//
-//						} catch (SQLException e) {
-//							e.printStackTrace();
-//						}
-//						continue loop1;
-//					}
-//				}else {
-//					System.out.println("보기 중 없는 번호를 입력하셨습니다.\n 첫 화면으로 돌아갑니다.뾰로롱\n ");
-//					continue loop1; 
-//				}
-//			}
-//		}else if(index==2) {
-//			int mindex=0;
-//			System.out.println("1.장르 순위 보기");
-//			System.out.println("2.나이 대별 장르 순위 보기");
-//			System.out.println("3. 장르별  추천 노래 보기");
-//			try {
-//				mindex=sc.nextInt();
-//			}catch(InputMismatchException e) {
-//				System.out.println("입력형식이 잘못되어 돌아갑니다.");
-//				continue loop1;
-//			}
-//			
-//			if(mindex==1) {
-//				int selectquery=2;
-//				try {
-//					forPrint(selectquery);
-//				} catch (SQLException e) {
-//				}
-//			}else if(mindex==2) {
-//				
-//			}else {
-//				System.out.println("목록에 없는 값으로 돌아가요~\n");
-//				//continue loop1;
-//			}
-//		}else {
-//			System.out.println("목록에 없는 값으로 돌아가요~\n");
-//			continue loop1;
-//		}
-//	}
-//}
