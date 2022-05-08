@@ -51,7 +51,7 @@ public boolean insertInfo(ServeyVO vo) throws SQLException{
 	return ret;
 }
 
-public void insertInfo(String servey) throws SQLException{
+public void insertServey(String servey) throws SQLException{
 	String sql = "insert into \"SERVEY\" values (?, \"SERVEY_CODE\".nextval, ?)";
 	try {
 		conn = jdbcTemplate.getConnection();
@@ -219,6 +219,7 @@ public boolean selectServeyName(String serveyname)throws SQLException{
 			}
 		}
 	}
+	System.out.println("검색 완료");
 	return stat;
 }
 
