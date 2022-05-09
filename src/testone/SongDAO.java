@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 public class SongDAO {
@@ -20,11 +21,11 @@ public class SongDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong (1, svo.getServeyCode());
 			pstmt.setString(2, svo.getSongName()); 
-			int result = pstmt.executeUpdate();
-			System.out.println(result + "행이 삽입 되었습니다.");
+			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			if(pstmt != null) {
 				try {
 					pstmt.close();
@@ -84,8 +85,10 @@ public class SongDAO {
 		return si;
 	}
 	public void updateSongCount(String songname, long code) throws SQLException{
-		String sql="update \"SONG\" set \"SONGCOUNT\"=(select \"SONGCOUNT\" from \"SONG\" where \"SERVEY_CODE\"="+code+"and"+"\"SONGNAME\"="+"'"+songname+"'"+""+")+1" +""
+		String sql="update \"SONG\" set \"SONGCOUNT\"=\"SONGCOUNT\"+1"
 				+ " where \"SERVEY_CODE\"="+code +"and \"SONGNAME\"='"+ songname +"'";
+//		String sql="update \"SONG\" set \"SONGCOUNT\"=(select \"SONGCOUNT\" from \"SONG\" where \"SERVEY_CODE\"="+code+"and"+"\"SONGNAME\"="+"'"+songname+"'"+""+")+1" +""
+//				+ " where \"SERVEY_CODE\"="+code +"and \"SONGNAME\"='"+ songname +"'";
 		try {
 			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);

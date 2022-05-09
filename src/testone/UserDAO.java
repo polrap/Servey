@@ -25,12 +25,10 @@ public class UserDAO {
 			pstmt.setLong (1, vo.getServeyCode()); 
 			pstmt.setLong(2, vo.getAge());
 			pstmt.setString(3, String.valueOf(vo.getGender()));
-			
-			int result = pstmt.executeUpdate();
-			System.out.println(result + "의 user info가 삽입 되었습니다.");
+			pstmt.executeUpdate();
 			ret = true;
 		} catch(SQLException e) {
-			System.out.println("보기 사항에 없는 번호를 입력 하셨습니다.\n첫 화면으로 돌아가겠습니다.");
+			System.out.println("\t보기 사항에 없는 번호를 입력 하셨습니다.\n \t첫 화면으로 돌아가겠습니다.");
 			ret= false;
 		} finally {
 			if(pstmt != null) {
@@ -90,7 +88,6 @@ public class UserDAO {
 				}
 			}
 		}
-		System.out.println("검색 완료");
 		return stat;
 	}
 	public int returnUserCount(UserVO uvo) {
@@ -130,15 +127,14 @@ public class UserDAO {
 				}
 			}
 		}
-		System.out.println("검색 완료");
 		return ok;
 	}
 	public boolean updateUserCount(UserVO uvo) throws SQLException{
 		 boolean ret;
-		String sql="update \"USER\" set \"COUNT\"=(select \"COUNT\" from \"USER\" "
-				+ "where  \"SERVEY_CODE\"="+uvo.getServeyCode()+" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"')+1"
-				+"where \"SERVEY_CODE\"="+uvo.getServeyCode() +" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"'"; 
-
+		String sql="update \"USER\" set \"COUNT\"=\"COUNT\"+1 where \"SERVEY_CODE\"="+uvo.getServeyCode() +" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"'"; 
+//		String sql="update \"USER\" set \"COUNT\"=(select \"COUNT\" from \"USER\" "
+//				+ "where  \"SERVEY_CODE\"="+uvo.getServeyCode()+" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"')+1"
+//				+"where \"SERVEY_CODE\"="+uvo.getServeyCode() +" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"'"; 
 		List<ServeyVO> ls = new ArrayList<>();
 		
 		try {

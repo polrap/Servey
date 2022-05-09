@@ -58,8 +58,7 @@ public void insertServey(String servey) throws SQLException{
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString (1, servey); 
 		pstmt.setLong(2, 1);
-		int result = pstmt.executeUpdate();
-		System.out.println(result + "servey가 삽입 되었습니다.");
+		pstmt.executeUpdate();
 	} catch(SQLException e) {
 		e.printStackTrace();
 	} finally {
@@ -81,8 +80,8 @@ public void insertServey(String servey) throws SQLException{
 }
 
 public List<ServeyVO> selectAll(int selectquery)throws SQLException{
-	System.out.println("------------------------------------");
-	System.out.println("장르 순위");
+	System.out.println("------------------------------------------------------------------------");
+	System.out.println("\t장르 순위");
 	String sql="";
 	if(selectquery==1) {
 		sql= "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
@@ -131,14 +130,11 @@ public List<ServeyVO> selectAll(int selectquery)throws SQLException{
 }
 public void updateInfo(int values) throws SQLException{
  
-	String sql="update \"SERVEY\" set \"SERVEY_COUNT\"=(select \"SERVEY_COUNT\" from \"SERVEY\" where  \"SERVEY_CODE\"="+values+")+1" +" where \"SERVEY_CODE\"="+values +""; 
-
-	List<ServeyVO> ls = new ArrayList<>();
-	
+	String sql="update \"SERVEY\" set \"SERVEY_COUNT\"=(select \"SERVEY_COUNT\" from \"SERVEY\" where  \"SERVEY_CODE\"="+values+")+1" +" where \"SERVEY_CODE\"="+values +""; 	
 	try {
 		conn = jdbcTemplate.getConnection();
 		pstmt = conn.prepareStatement(sql);
-		int result = pstmt.executeUpdate();
+		pstmt.executeUpdate();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	} 
@@ -181,7 +177,6 @@ public boolean selectServeyName(String serveyname)throws SQLException{
 			}
 		}
 	}
-	System.out.println("검색 완료");
 	return stat;
 }
 
@@ -191,7 +186,7 @@ public int lastServey_Code() throws SQLException{
 	try {
 		conn = jdbcTemplate.getConnection();
 		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery(); //쿼리 전송!
+		rs = pstmt.executeQuery();
 		rs.next();
 		ok=rs.getInt("SERVEY_CODE");
 	} catch(SQLException e) {

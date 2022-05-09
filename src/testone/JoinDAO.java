@@ -16,7 +16,7 @@ public class JoinDAO {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}
 	public List<JoinVO> selectAll()throws SQLException{
-		System.out.println("------------------------------------");
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("나이 대 별 장르 순위 결과 입니다.");
 	String sql="select \"US\".\"AGE\",  \"SV\".\"SERVEY_NAME\",  sum(\"COUNT\") as\"AGECOUNT\" "
 			+ "from \"USER\" \"US\" join \"SERVEY\" \"SV\" on (\"US\".\"SERVEY_CODE\"=\"SV\".\"SERVEY_CODE\")  "
@@ -27,7 +27,7 @@ public class JoinDAO {
 		try {
 			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery(); //쿼리 전송!
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				JoinVO tmp = new JoinVO(
 						rs.getLong("AGE"),
@@ -64,7 +64,7 @@ public class JoinDAO {
 	}
 	
 	public List<JoinVO> selectThree()throws SQLException{
-		System.out.println("------------------------------------");
+		System.out.println("------------------------------------------------------------------------");
 		String sql="select  \"SV\".\"SERVEY_NAME\" as\"SERVEYNAME\",  \"SG\".\"SONGNAME\" as\"SNAME\",\"SG\".\"SONGCOUNT\" as\"SONGCOUNT\"from \r\n" + 
 				"\"SONG\" \"SG\"  join \"SERVEY\" \"SV\"\r\n" + 
 				" on \"SG\".\"SERVEY_CODE\"= \"SV\".\"SERVEY_CODE\"\r\n" + 
