@@ -163,7 +163,7 @@ public class MainCtrl {
 				e.printStackTrace();
 			}
 		}
-	}else if(value!=i){
+	}else if(value<i){
 		try {
 			sdao.updateInfo(value);
 			if(makeUser( value, age, gender)) {
@@ -230,10 +230,15 @@ public class MainCtrl {
 			cGender='F';
 		}
 		uvo=new UserVO(value, age, cGender);
-		try {
+		if(udao.selectUser(value, age, cGender)) {
+			try {
+				long countValue=udao.returnUserCount(uvo);
+				s=udao.updateUserCount(uvo,countValue);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else if(udao.selectUser(value, age, cGender)==false) {
 			s=udao.insertUser(uvo);
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return s;
 	}

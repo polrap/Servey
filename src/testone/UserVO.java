@@ -4,12 +4,15 @@ public class UserVO {
 	private long serveyCode;
 	private long age;
 	private char gender;
+	private long count;
+	
 	
 	public UserVO(long serveyCode, long age, char gender) {
 		super();
 		this.serveyCode = serveyCode;
 		this.age = age;
 		this.gender = gender;
+		this.count=1;
 	}
 	public long getServeyCode() {
 		return serveyCode;
@@ -28,6 +31,12 @@ public class UserVO {
 	}
 	public void setGender(char gender) {
 		this.gender = gender;
+	}
+	public long getCount() {
+		return count;
+	}
+	public void setCount(long count) {
+		this.count = count;
 	}
 	
 }
