@@ -133,7 +133,7 @@ public class UserDAO {
 		System.out.println("검색 완료");
 		return ok;
 	}
-	public boolean updateUserCount(UserVO uvo, long countValue) throws SQLException{
+	public boolean updateUserCount(UserVO uvo) throws SQLException{
 		 boolean ret;
 		String sql="update \"USER\" set \"COUNT\"=(select \"COUNT\" from \"USER\" "
 				+ "where  \"SERVEY_CODE\"="+uvo.getServeyCode()+" and \"AGE\"="+uvo.getAge() +" and \"GENDER\"='"+uvo.getGender()+"')+1"

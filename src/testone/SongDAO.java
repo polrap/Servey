@@ -84,7 +84,8 @@ public class SongDAO {
 		return si;
 	}
 	public void updateSongCount(String songname, long code) throws SQLException{
-		String sql="update \"SONG\" set \"SONGCOUNT\"=(select \"SONGCOUNT\" from \"SONG\" where \"SERVEY_CODE\"="+code+"and"+"\"SONGNAME\"="+"'"+songname+"'"+""+")+1" +" where \"SERVEY_CODE\"="+code +"";
+		String sql="update \"SONG\" set \"SONGCOUNT\"=(select \"SONGCOUNT\" from \"SONG\" where \"SERVEY_CODE\"="+code+"and"+"\"SONGNAME\"="+"'"+songname+"'"+""+")+1" +""
+				+ " where \"SERVEY_CODE\"="+code +"and \"SONGNAME\"='"+ songname +"'";
 		try {
 			conn = jdbcTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);

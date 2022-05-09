@@ -120,6 +120,7 @@ public class MainCtrl {
 			i++;
 			System.out.println(i+"\t"+tmp.inString());
 		}
+		System.out.println("------------------------------------");
 	}
 	public void forPrintJDAO(int selectquery) throws SQLException{
 		if(selectquery==2) {
@@ -129,6 +130,7 @@ public class MainCtrl {
 			i++;
 			System.out.println(i+"\t"+tmp.secondQueryString());
 		}
+		System.out.println("------------------------------------");
 		}else if(selectquery==3) {
 			List<JoinVO>ret=jdao.selectThree();
 			int i=0;
@@ -136,6 +138,7 @@ public class MainCtrl {
 				i++;
 				System.out.println(i+"\t"+tmp.threeQueryString());
 			}
+			System.out.println("------------------------------------");
 		}
 	}
 	
@@ -222,7 +225,7 @@ public class MainCtrl {
 	}
 	
 	public boolean makeUser(int value,int age,int gender) throws SQLException{
-		boolean s=true;
+		boolean s=false;
 		char cGender='n';
 		if(gender==1) {
 			cGender='M';
@@ -232,8 +235,8 @@ public class MainCtrl {
 		uvo=new UserVO(value, age, cGender);
 		if(udao.selectUser(value, age, cGender)) {
 			try {
-				long countValue=udao.returnUserCount(uvo);
-				s=udao.updateUserCount(uvo,countValue);
+				udao.returnUserCount(uvo);
+				s=udao.updateUserCount(uvo);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
