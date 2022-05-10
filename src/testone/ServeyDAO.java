@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 public class ServeyDAO {
 
 private JdbcTemplate jdbcTemplate;
@@ -178,6 +176,44 @@ public boolean selectServeyName(String serveyname)throws SQLException{
 		}
 	}
 	return stat;
+}
+
+public int selectServeyCount()throws SQLException{
+	String sql = "select sum(\"SERVEY_COUNT\") as\"COUNT\" from \"SERVEY\"";
+	int sermoonCount=0;
+	try {
+		conn = jdbcTemplate.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			sermoonCount=rs.getInt("COUNT");
+		}
+	} catch(SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	return sermoonCount;
 }
 
 public int lastServey_Code() throws SQLException{

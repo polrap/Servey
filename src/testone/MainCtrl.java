@@ -22,10 +22,10 @@ public class MainCtrl {
 		boolean startEnd=true;
 		sc= new Scanner(System.in);
 		loop1:while(infostat) {
-		System.out.println("\t음악 설문조사");
-		System.out.println("\t1. 설문 참여");
-		System.out.println("\t2. 설문 참여 현황");
 		try {
+			System.out.println("\t음악 설문조사");
+			System.out.println("\t1. 설문 참여");
+			System.out.println("\t2. 설문 참여 현황");
 			System.out.printf("\t");
 			index=sc.nextInt();
 			if(index==1) {
@@ -50,30 +50,45 @@ public class MainCtrl {
 			}
 			}else if(index==2) {
 				int mindex=0;
-				System.out.println("\t1.장르 순위 보기\n\t2.연령대 별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
-				System.out.printf("\t");
-				mindex=sc.nextInt();
-				if(mindex==1) {
-					int selectquery=2;
-					try {
-						forPrint(selectquery);
-					} catch (SQLException e) {
+				int serveyCount=0;
+				try {
+					serveyCount=sdao.selectServeyCount();
+					if(serveyCount==0) {
+						System.out.println("------------------------------------------------------------------------");
+						System.out.println("\n\t현재는 설문이 작성되지 않았습니다.\n \t추후 다시 확인 부탁드립니다.\n");
+					}else {
+						System.out.println("------------------------------------------------------------------------");
+						System.out.println("\t현재까지 진행된 설문의 횟수는:\t"+serveyCount);
+						System.out.println("\n\t1.장르 순위 보기\n\t2.연령대 별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
+						System.out.printf("\t");
+						mindex=sc.nextInt();
+						if(mindex==1) {
+							int selectquery=2;
+							try {
+								forPrint(selectquery);
+							} catch (SQLException e) {
+							}
+						}else if(mindex==2) {
+							int selectquery=mindex;
+							try {
+								forPrintJDAO(selectquery);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}else if(mindex==3){
+							int selectquery=mindex;
+							try {
+								forPrintJDAO(selectquery);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							}
+						}
 					}
-				}else if(mindex==2) {
-					int selectquery=mindex;
-					try {
-						forPrintJDAO(selectquery);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}else if(mindex==3){
-					int selectquery=mindex;
-					try {
-						forPrintJDAO(selectquery);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
+				
 			}else {
 				System.out.println("\t목록에 없는 값으로 돌아가요~\n");
 				continue loop1;
@@ -83,6 +98,9 @@ public class MainCtrl {
 		System.out.println("\t입력형식이 잘못되어 돌아갑니다.\n");
 		inter();
 		}
+//		catch(SQLException e) {
+//			e.printStackTrace();
+//		}
 		}
 		return startEnd;
 	}
