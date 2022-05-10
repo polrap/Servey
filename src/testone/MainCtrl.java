@@ -95,12 +95,9 @@ public class MainCtrl {
 			}
 		}
 		catch(InputMismatchException e) {
-		System.out.println("\t입력형식이 잘못되어 돌아갑니다.\n");
-		inter();
-		}
-//		catch(SQLException e) {
-//			e.printStackTrace();
-//		}
+			System.out.println("\t입력형식이 잘못되어 돌아갑니다.\n");
+			inter();
+			}
 		}
 		return startEnd;
 	}
