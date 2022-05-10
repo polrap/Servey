@@ -17,7 +17,7 @@ public class JoinDAO {
 	}
 	public List<JoinVO> selectAll()throws SQLException{
 		System.out.println("------------------------------------------------------------------------");
-		System.out.println("나이 대 별 장르 순위 결과 입니다.");
+		System.out.println("\t나이 대 별 장르 순위 결과 입니다.");
 	String sql="select \"US\".\"AGE\",  \"SV\".\"SERVEY_NAME\",  sum(\"COUNT\") as\"AGECOUNT\" "
 			+ "from \"USER\" \"US\" join \"SERVEY\" \"SV\" on (\"US\".\"SERVEY_CODE\"=\"SV\".\"SERVEY_CODE\")  "
 			+ " group by \"SV\".\"SERVEY_NAME\",\"US\".\"AGE\" order by \"US\".\"AGE\" desc, \"AGECOUNT\" desc";

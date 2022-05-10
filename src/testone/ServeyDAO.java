@@ -81,11 +81,11 @@ public void insertServey(String servey) throws SQLException{
 
 public List<ServeyVO> selectAll(int selectquery)throws SQLException{
 	System.out.println("------------------------------------------------------------------------");
-	System.out.println("\t장르 순위");
 	String sql="";
 	if(selectquery==1) {
 		sql= "select  * from \"SERVEY\"order by \"SERVEY_CODE\" ";
 	}else if(selectquery==2) {
+		System.out.println("\t장르 순위");
 		sql= "select  * from \"SERVEY\"order by \"SERVEY_COUNT\" desc ";
 	}
 	List<ServeyVO> ls = new ArrayList<>();

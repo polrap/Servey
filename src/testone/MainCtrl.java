@@ -49,7 +49,9 @@ public class MainCtrl {
 				}
 			}
 			}else if(index==2) {
+				System.out.println();
 				int mindex=0;
+				System.out.println("------------------------------------------------------------------------");
 				System.out.println("\t1.장르 순위 보기\n\t2.나이 대별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
 				System.out.printf("\t");
 				mindex=sc.nextInt();
@@ -141,7 +143,7 @@ public class MainCtrl {
 	}
 	
 	public void turnTable(int age, int gender,int i){
-	System.out.println("\t장르를 선택해 주세요\n");
+	System.out.println("\t보기 중의 숫자를 입력해 주세요\n");
 	System.out.printf("\t");
 	int value=0;
 	try {
@@ -200,7 +202,7 @@ public class MainCtrl {
 	
 	public boolean songIn(int age,int gender, int value) {
 		boolean songInComplete=true;
-		System.out.println("\t선택하신 장르 중 가장 좋아하시는 음악의 제목을 넣어주세요\n");
+		System.out.println("\t선택하신 장르 중 가장 좋아하시는 음악의 제목을 특수문제 제외 후 넣어주세요\n");
 		System.out.printf("\t");
 		String songname="";
 		if(songInput==false) {
@@ -217,10 +219,10 @@ public class MainCtrl {
 				songDAO.updateSongCount(songname,value);
 			}
 		} catch (SQLException e) {
-			System.out.println("\t뭔가 잘못 되었네여");
+			System.out.println("\t뭔가 잘못 되었네여 이건 나올 일 없는데 나온 거면 설문자 님은 킹정!!\n 뭐가 잘못됐는지는 모르겠으니 프로그램 재실행, PC 재부팅 추천!!");
 			songInComplete=false;
 		}
-		System.out.println("\t설문에 참여해주셔서 감사합니다\n\n");
+		System.out.println("\t설문에 참여해 주셔서 감사합니다\n");
 		return songInComplete;
 	}
 	
