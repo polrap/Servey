@@ -50,7 +50,7 @@ public class MainCtrl {
 			}
 			}else if(index==2) {
 				int mindex=0;
-				System.out.println("\t1.장르 순위 보기\n\t2.나이 대별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
+				System.out.println("\t1.장르 순위 보기\n\t2.연령대 별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
 				System.out.printf("\t");
 				mindex=sc.nextInt();
 				if(mindex==1) {

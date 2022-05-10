@@ -31,7 +31,7 @@ public class JoinVO {
 				+ longcolumn1 + ", longcolumn2=" + longcolumn2 + "]";
 	}
 	public String secondQueryString() {
-		return "[나이대=" +  longcolumn1 +  
+		return "[연령대=" +  longcolumn1 +  
 		", 장르명=" + stringcolumn1 + "\t"+"투표 수=" + longcolumn2 + "]";
 	}
 	public String threeQueryString() {
