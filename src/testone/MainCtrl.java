@@ -218,7 +218,6 @@ public class MainCtrl {
 			}
 		} catch (SQLException e) {
 			System.out.println("\t뭔가 잘못 되었네여");
-			
 			songInComplete=false;
 		}
 		System.out.println("\t설문에 참여해주셔서 감사합니다\n\n");
