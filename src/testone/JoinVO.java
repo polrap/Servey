@@ -6,6 +6,11 @@ public class JoinVO {
 	private long longcolumn1;
 	private long longcolumn2;
 	
+	public JoinVO(String stringcolumn1, long longcolumn1) {
+		super();
+		this.stringcolumn1 = stringcolumn1;
+		this.longcolumn1 = longcolumn1;
+	}
 	public JoinVO(long longcolumn1, String stringcolumn1, long longcolumn2) {
 		super();
 		this.longcolumn1 = longcolumn1;
@@ -29,6 +34,10 @@ public class JoinVO {
 	public String toString() {
 		return "JoinVO [stringcolumn1=" + stringcolumn1 + ", stringcolumn2=" + stringcolumn2 + ", longcolumn1="
 				+ longcolumn1 + ", longcolumn2=" + longcolumn2 + "]";
+	}
+	public String genderQueryString() {
+		return "[장르명=" +  stringcolumn1 +  
+		"  \t"+"투표 수=\t" + longcolumn1 + "]";
 	}
 	public String secondQueryString() {
 		return "[연령대=" +  longcolumn1 +  

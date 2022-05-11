@@ -33,9 +33,7 @@ public class MainCtrl {
 			int age=sc.nextInt();
 			if(ageTran(age)) {
 				System.out.println("\t성별을 입력해주세요\n \t1. 남성 2. 여성\n");
-				int gender;
-				System.out.printf("\t");
-				gender=sc.nextInt();
+				int gender=genderChoice();
 				if(gender==1 ||gender==2) {
 						try {
 							forPrint(age, gender);
@@ -58,7 +56,7 @@ public class MainCtrl {
 					}else {
 						System.out.println("------------------------------------------------------------------------");
 						System.out.println("\t현재까지 진행된 설문의 횟수는:\t"+serveyCount);
-						System.out.println("\n\t1.장르 순위 보기\n\t2.연령대 별 장르 순위 보기\n\t3. 장르별  추천 노래 보기");
+						System.out.println("\n\t1.장르 순위 보기\n\t2.연령대 별 장르 순위 보기\n\t3. 장르별  추천 노래 보기\n\t4. 성별 장르 순위");
 						System.out.printf("\t");
 						mindex=sc.nextInt();
 						if(mindex==1) {
@@ -81,6 +79,18 @@ public class MainCtrl {
 							} catch (SQLException e) {
 								e.printStackTrace();
 							}
+						}else if(mindex==4) {
+							System.out.println("\t성별 선호도를 보고싶은 성별을 입력해주세요\n \t1. 남성 2. 여성\n");
+							int gender=genderChoice();
+							List<JoinVO>ret=jdao.selectGender(gender);
+							int i=0;
+							for(JoinVO tmp: ret) {
+								i++;
+								System.out.println("\t"+i+"\t"+tmp.genderQueryString());
+							}
+							System.out.println("------------------------------------------------------------------------");
+
+							
 						}
 					}
 				} catch (SQLException e1) {
@@ -99,6 +109,13 @@ public class MainCtrl {
 			}
 		}
 		return startEnd;
+	}
+
+	public int genderChoice() {
+		int gender;
+		System.out.printf("\t");
+		gender=sc.nextInt();
+		return gender;
 	}
 	
 	public boolean ageTran(int age) {
@@ -155,7 +172,7 @@ public class MainCtrl {
 	}
 	
 	public void turnTable(int age, int gender,int i){
-	System.out.println("\t장르를 선택해 주세요\n");
+	System.out.println("\t선호하시는 장르를 선택해 주세요\n");
 	System.out.printf("\t");
 	int value=0;
 	try {
