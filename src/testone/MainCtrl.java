@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainCtrl {
-	ServeyDAO sdao= new ServeyDAO();
-	SongDAO songDAO= new SongDAO();
-	UserDAO udao=new UserDAO();
-	JoinDAO jdao= new JoinDAO();
-	Scanner sc;
-	SongVO svo;
-	UserVO uvo;
-	int index;
-	boolean serveyInput=false;
-	boolean songInput=false;
-	boolean infostat=true;
+	private ServeyDAO sdao= new ServeyDAO();
+	private SongDAO songDAO= new SongDAO();
+	private UserDAO udao=new UserDAO();
+	private JoinDAO jdao= new JoinDAO();
+	private Scanner sc;
+	private SongVO svo;
+	private UserVO uvo;
+	private int index;
+	private boolean songInput=false;
+	private boolean infostat=true;
 	
 	public boolean inter() throws ScopeException{
 		boolean startEnd=true;

@@ -1,7 +1,7 @@
 package testone;
 
 public class UserVO {
-	private long serveyCode;
+	private long serveycode;
 	private long age;
 	private char gender;
 	private long count;
@@ -9,16 +9,16 @@ public class UserVO {
 	
 	public UserVO(long serveyCode, long age, char gender) {
 		super();
-		this.serveyCode = serveyCode;
+		this.serveycode = serveyCode;
 		this.age = age;
 		this.gender = gender;
 		this.count=1;
 	}
 	public long getServeyCode() {
-		return serveyCode;
+		return serveycode;
 	}
 	public void setServeyCode(long serveyCode) {
-		this.serveyCode = serveyCode;
+		this.serveycode = serveyCode;
 	}
 	public long getAge() {
 		return age;

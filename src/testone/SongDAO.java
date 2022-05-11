@@ -6,11 +6,8 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
-public class SongDAO {
-	private JdbcTemplate jdbcTemplate;
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+public class SongDAO extends DataBaseConnectResource{
+	
 	public SongDAO() {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}

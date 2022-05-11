@@ -7,11 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JoinDAO {
-	private JdbcTemplate jdbcTemplate;
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+public class JoinDAO extends DataBaseConnectResource{
 	public JoinDAO() {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}

@@ -32,11 +32,11 @@ public class JoinVO {
 	}
 	public String secondQueryString() {
 		return "[연령대=" +  longcolumn1 +  
-		", 장르명=" + stringcolumn1 + "\t"+"투표 수=" + longcolumn2 + "]";
+		",\t 장르명=" + stringcolumn1 + "  \t"+"투표 수=\t" + longcolumn2 + "]";
 	}
 	public String threeQueryString() {
 		return "[장르명=" +  stringcolumn1 +  
-		", 곡 명=" +stringcolumn2  + "\t"+"투표 수=" + longcolumn1 + "]";
+		",\t 곡 명=" +stringcolumn2  + "\t"+"투표 수=\t" + longcolumn1 + "]";
 	}
 	public String getStringcolumn1() {
 		return stringcolumn1;

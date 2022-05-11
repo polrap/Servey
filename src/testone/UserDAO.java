@@ -7,11 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
-	private JdbcTemplate jdbcTemplate;
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+public class UserDAO extends DataBaseConnectResource{
+	
 	public UserDAO() {
 		jdbcTemplate = JdbcTemplate.getInstance();
 	}

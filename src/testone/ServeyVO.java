@@ -3,7 +3,6 @@ package testone;
 public class ServeyVO {
 
 	private String serveyname;
-
 	private long serveycode;
 	private long serveycount;
 	public ServeyVO() {
